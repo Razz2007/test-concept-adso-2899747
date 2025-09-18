@@ -1,0 +1,24 @@
+@startuml
+title Restaurant Management System – Package Diagram
+
+package "Customer & Reservations" {
+  class customer
+  class reservation
+  class table
+}
+
+package "Orders & Kitchen" {
+  class order
+  class order_detail
+  class dish
+  class ingredient
+  class dish_ingredient
+}
+
+package "Administration" {
+  class employee
+  class supplier
+  class inventory
+}
+
+@enduml

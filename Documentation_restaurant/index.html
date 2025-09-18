@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Management System – Proyecto</title>
+  <link rel="stylesheet" href="asset/css/estilos.css">
+  <script>
+    function openTab(evt, tabName, skipHash) {
+      var i, sections, buttons;
+      sections = document.querySelectorAll('section');
+      for (i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+      }
+      buttons = document.querySelectorAll('nav[role="tablist"] button');
+      for (i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+        buttons[i].setAttribute('aria-selected', 'false');
+      }
+      var targetSection = document.getElementById(tabName);
+      if (targetSection) targetSection.classList.add('active');
+      if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add('active');
+        evt.currentTarget.setAttribute('aria-selected', 'true');
+      }
+      if (!skipHash) {
+        try { location.hash = tabName; } catch (e) {}
+      }
+    }
+    function openSubTab(elmnt, contentId) {
+      var i, contents, buttons;
+      contents = document.getElementsByClassName('subcontent');
+      for (i = 0; i < contents.length; i++) {
+        contents[i].classList.remove('active');
+      }
+      buttons = elmnt.parentElement.querySelectorAll('button');
+      for (i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+      }
+      document.getElementById(contentId).classList.add('active');
+      elmnt.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize tabs from hash
+      var initial = (location.hash || '').replace('#','') || 'presentation';
+      var initialBtn = document.querySelector("nav button[data-tab='"+initial+"']") || document.querySelector('nav button');
+      if (initialBtn) {
+        openTab({currentTarget: initialBtn}, initialBtn.getAttribute('data-tab') || 'presentation', true);
+      }
+
+      // Filter modules by search
+      var search = document.getElementById('moduleSearch');
+      if (search) {
+        var items = Array.prototype.slice.call(document.querySelectorAll('.modules-grid a.card'));
+        search.addEventListener('input', function(){
+          var q = (search.value || '').toLowerCase().trim();
+          items.forEach(function(el){
+            var text = el.textContent.toLowerCase();
+            el.style.display = text.indexOf(q) > -1 ? '' : 'none';
+          });
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+<header>
+  <h1>Restaurant Management System</h1>
+</header>
+<nav role="tablist" aria-label="Navegación de secciones">
+  <button role="tab" aria-controls="presentation" aria-selected="true" class="active" data-tab="presentation" onclick="openTab(event, 'presentation')">Presentación</button>
+  <button role="tab" aria-controls="diagrams" aria-selected="false" data-tab="diagrams" onclick="openTab(event, 'diagrams')">Diagramas</button>
+  <button role="tab" aria-controls="hu" aria-selected="false" data-tab="hu" onclick="openTab(event, 'hu')">Tablero HU</button>
+  <button role="tab" aria-controls="moscow" aria-selected="false" data-tab="moscow" onclick="openTab(event, 'moscow')">MoSCoW</button>
+  <button role="tab" aria-controls="phases" aria-selected="false" data-tab="phases" onclick="openTab(event, 'phases')">Fases & Estimación</button>
+</nav>
+<div class="module-nav" aria-label="Módulos del sistema">
+  <a href="cliente_reservas/cliente_reservas.html" class="nav-link">Cliente & Reservas</a>
+  <a href="pedidos_cocina/pedidos_cocina.html" class="nav-link">Pedidos & Cocina</a>
+  <a href="administracion/administracion.html" class="nav-link">Administración</a>
+</div>
+<section id="presentation" class="active">
+  <div class="card" style="margin-top: 8px;">
+    <h2 style="margin-top:0">Presentación del Proyecto</h2>
+    <p>Este sistema gestiona todas las operaciones relacionadas con restaurantes: desde la gestión de clientes y reservas hasta pedidos, cocina e inventario. Incluye módulos para cliente & reservas, pedidos & cocina y administración.</p>
+    <div class="searchbar">
+      <input id="moduleSearch" type="search" placeholder="Buscar módulo por nombre..." aria-label="Buscar módulo">
+    </div>
+    <div class="modules-grid">
+      <a href='cliente_reservas/cliente_reservas.html' class="card">Cliente & Reservas</a>
+      <a href='pedidos_cocina/pedidos_cocina.html' class="card">Pedidos & Cocina</a>
+      <a href='administracion/administracion.html' class="card">Administración</a>
+    </div>
+  </div>
+</section>
+<section id="diagrams">
+  <h2>Diagramas</h2>
+  <div class="subtabs">
+    <button class='active' onclick="openSubTab(this,'diagram-content-0')">Package Diagram</button><button class='' onclick="openSubTab(this,'diagram-content-1')">Class Diagram</button><button class='' onclick="openSubTab(this,'diagram-content-2')">Sequence Diagram</button><button class='' onclick="openSubTab(this,'diagram-content-3')">Use Case Diagram</button>
+  </div>
+
+    <div id="diagram-content-0" class="subcontent active">
+      <h3>Package Diagram</h3>
+      <img src="asset/doc/proyecto/package/package.png" alt="Package Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>@startuml
+title Restaurant Management System – Package Diagram
+
+package "Cliente & Reservas" {
+  class cliente
+  class mesa
+  class reserva
+}
+
+package "Pedidos & Cocina" {
+  class pedido
+  class detalle_pedido
+  class plato
+  class ingrediente
+  class plato_ingrediente
+}
+
+package "Administración" {
+  class empleado
+  class proveedor
+  class inventario
+}
+
+@enduml
+</code></pre>
+    </div>
+
+    <div id="diagram-content-1" class="subcontent ">
+      <h3>Class Diagram</h3>
+      <img src="asset/doc/proyecto/class/class.png" alt="Class Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>@startuml
+title Restaurant Management System – Class Diagram
+
+class cliente {
+  + id
+  + first_name
+  + last_name
+  + phone
+  + email
+  + address
+  + birth_date
+}
+
+class mesa {
+  + id
+  + code
+  + capacity
+  + location
+}
+
+class reserva {
+  + id
+  + code
+  + cliente_id
+  + mesa_id
+  + reservation_date
+  + reservation_time
+  + number_of_people
+  + special_request
+}
+
+class pedido {
+  + id
+  + code
+  + cliente_id
+  + mesa_id
+  + order_date
+  + status
+  + total
+}
+
+class detalle_pedido {
+  + id
+  + pedido_id
+  + plato_id
+  + quantity
+  + price
+}
+
+class plato {
+  + id
+  + code
+  + name
+  + description
+  + price
+  + preparation_time
+}
+
+class ingrediente {
+  + id
+  + code
+  + name
+  + unit
+  + stock
+  + min_stock
+  + max_stock
+}
+
+class plato_ingrediente {
+  + id
+  + plato_id
+  + ingrediente_id
+  + quantity_required
+}
+
+class empleado {
+  + id
+  + first_name
+  + last_name
+  + document_number
+  + role
+  + phone
+  + email
+  + hire_date
+  + salary
+}
+
+class proveedor {
+  + id
+  + name
+  + contact_name
+  + phone
+  + email
+  + address
+}
+
+class inventario {
+  + id
+  + ingrediente_id
+  + current_stock
+  + last_updated
+}
+
+' Relationships
+cliente "1" -- "many" reserva
+mesa "1" -- "many" reserva
+cliente "1" -- "many" pedido
+mesa "1" -- "many" pedido
+pedido "1" -- "many" detalle_pedido
+plato "1" -- "many" detalle_pedido
+plato "1" -- "many" plato_ingrediente
+ingrediente "1" -- "many" plato_ingrediente
+ingrediente "1" -- "many" inventario
+@enduml
+</code></pre>
+    </div>
+
+    <div id="diagram-content-2" class="subcontent ">
+      <h3>Sequence Diagram</h3>
+      <img src="asset/doc/proyecto/secuence/secuence.png" alt="Sequence Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>@startuml
+title Restaurant Order Process – Sequence Diagram
+
+actor Cliente
+participant "Administrador" as Admin
+participant "Pedido" as Pedido
+participant "Cocina" as Cocina
+participant "Inventario" as Inventario
+
+Cliente -> Admin : Solicitar reserva
+Admin -> Reserva : Crear reserva
+Reserva --> Admin : Reserva confirmada
+Admin --> Cliente : Confirmación de reserva
+
+Cliente -> Admin : Hacer pedido
+Admin -> Pedido : Crear pedido
+Pedido -> Inventario : Verificar stock
+Inventario --> Pedido : Stock disponible
+Pedido -> Cocina : Enviar a preparación
+Cocina --> Pedido : Pedido listo
+Pedido --> Admin : Pedido completado
+Admin --> Cliente : Entregar pedido
+
+@enduml
+</code></pre>
+    </div>
+
+    <div id="diagram-content-3" class="subcontent ">
+      <h3>Use Case Diagram</h3>
+      <img src="asset/doc/proyecto/use_case/use_case.png" alt="Use Case Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor #1f2937
+  ArrowColor #4b5563
+}
+skinparam ActorStyle awesome
+
+title Restaurant Management System – Use Case Diagram
+
+actor "Cliente" as Cliente
+actor "Administrador" as Admin
+
+package "Cliente & Reservas" {
+  (Reservar Mesa) as UC_Reserva
+  (Consultar Reserva) as UC_Consulta
+}
+
+package "Pedidos & Cocina" {
+  (Hacer Pedido) as UC_Pedido
+  (Preparar Plato) as UC_Preparar
+  (Controlar Stock) as UC_Stock
+}
+
+package "Administración" {
+  (Gestionar Empleados) as UC_Empleados
+  (Gestionar Proveedores) as UC_Proveedores
+  (Actualizar Inventario) as UC_Inventario
+}
+
+Cliente --> UC_Reserva
+Cliente --> UC_Consulta
+Cliente --> UC_Pedido
+
+Admin --> UC_Preparar
+Admin --> UC_Stock
+Admin --> UC_Empleados
+Admin --> UC_Proveedores
+Admin --> UC_Inventario
+
+@enduml
+</code></pre>
+    </div>
+
+</section>
+<section id="hu">
+  <h2>Tablero de Historias de Usuario (HU)</h2>
+
+    <details>
+      <summary>Cliente & Reservas</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero gestionar clientes para capturar información personal y contactar.</li><li>Como Administrador quiero administrar mesas para controlar capacidad y ubicación en el restaurante.</li><li>Como Administrador quiero gestionar reservas para organizar la ocupación y evitar conflictos.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Pedidos & Cocina</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero gestionar pedidos para procesar órdenes de clientes.</li><li>Como Administrador quiero administrar detalles de pedidos para desglosar platos y cantidades.</li><li>Como Administrador quiero gestionar platos para definir menú y precios.</li><li>Como Administrador quiero controlar ingredientes para gestionar stock y recetas.</li><li>Como Administrador quiero asociar ingredientes a platos para calcular requerimientos.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Administración</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero gestionar empleados para controlar personal y roles.</li><li>Como Administrador quiero administrar proveedores para gestionar suministros.</li><li>Como Administrador quiero controlar inventario para mantener stock de ingredientes.</li>
+        </ul>
+      </div>
+    </details>
+
+</section>
+<section id="moscow">
+  <h2>Priorización MoSCoW</h2>
+  <h3>Must</h3><ul><li>Como Administrador quiero gestionar clientes para capturar información personal y contactar.</li><li>Como Administrador quiero administrar mesas para controlar capacidad y ubicación en el restaurante.</li><li>Como Administrador quiero gestionar reservas para organizar la ocupación y evitar conflictos.</li><li>Como Administrador quiero gestionar pedidos para procesar órdenes de clientes.</li><li>Como Administrador quiero administrar detalles de pedidos para desglosar platos y cantidades.</li><li>Como Administrador quiero gestionar platos para definir menú y precios.</li></ul><h3>Should</h3><ul><li>Como Administrador quiero controlar ingredientes para gestionar stock y recetas.</li><li>Como Administrador quiero asociar ingredientes a platos para calcular requerimientos.</li><li>Como Administrador quiero gestionar empleados para controlar personal y roles.</li></ul><h3>Could</h3><ul><li>Como Administrador quiero administrar proveedores para gestionar suministros.</li><li>Como Administrador quiero controlar inventario para mantener stock de ingredientes.</li></ul><h3>Wont</h3><ul></ul>
+</section>
+<section id="phases">
+  <h2>Fases y Estimación</h2>
+  <table class="phase-table">
+    <thead><tr><th>Fase</th><th>Historias de Usuario</th><th>Estimación (hrs)</th><th>Avance (%)</th></tr></thead>
+    <tbody>
+    <tr><td>Phase 1</td><td><ul><li>Como Administrador quiero gestionar clientes para capturar información personal y contactar.</li><li>Como Administrador quiero administrar mesas para controlar capacidad y ubicación en el restaurante.</li><li>Como Administrador quiero gestionar reservas para organizar la ocupación y evitar conflictos.</li><li>Como Administrador quiero gestionar pedidos para procesar órdenes de clientes.</li><li>Como Administrador quiero administrar detalles de pedidos para desglosar platos y cantidades.</li><li>Como Administrador quiero gestionar platos para definir menú y precios.</li></ul></td><td></td><td></td></tr><tr><td>Phase 2</td><td><ul><li>Como Administrador quiero controlar ingredientes para gestionar stock y recetas.</li><li>Como Administrador quiero asociar ingredientes a platos para calcular requerimientos.</li><li>Como Administrador quiero gestionar empleados para controlar personal y roles.</li></ul></td><td></td><td></td></tr><tr><td>Phase 3</td><td><ul><li>Como Administrador quiero administrar proveedores para gestionar suministros.</li><li>Como Administrador quiero controlar inventario para mantener stock de ingredientes.</li></ul></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</section>
+</body>
+</html>

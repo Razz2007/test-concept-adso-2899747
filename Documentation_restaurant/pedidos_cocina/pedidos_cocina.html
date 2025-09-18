@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedidos & Cocina – Restaurant Management System</title>
+  <link rel="stylesheet" href="../asset/css/estilos.css">
+</head>
+<body>
+<header>
+  <h1>Pedidos & Cocina</h1>
+</header>
+<nav>
+  <a href="../index.html" class="nav-link">Inicio</a>
+  <a href="../cliente_reservas/cliente_reservas.html" class="nav-link">Cliente & Reservas</a>
+  <a href="pedidos_cocina.html" class="nav-link active">Pedidos & Cocina</a>
+  <a href="../administracion/administracion.html" class="nav-link">Administración</a>
+</nav>
+<main>
+  <div class="card">
+    <p>Manages orders, order details, dishes, ingredients and dish-ingredient relationships.</p>
+    <h2>Entities</h2>
+    <table>
+      <thead><tr><th>Entity</th><th>Attributes</th></tr></thead>
+      <tbody>
+      <tr><td><strong>pedido</strong></td><td>id, code, cliente_id, mesa_id, order_date, status, total</td></tr>
+      <tr><td><strong>detalle_pedido</strong></td><td>id, pedido_id, plato_id, quantity, price, status</td></tr>
+      <tr><td><strong>plato</strong></td><td>id, code, name, description, price, preparation_time, status</td></tr>
+      <tr><td><strong>ingrediente</strong></td><td>id, code, name, unit, stock, min_stock, max_stock, status</td></tr>
+      <tr><td><strong>plato_ingrediente</strong></td><td>id, plato_id, ingrediente_id, quantity_required, status</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

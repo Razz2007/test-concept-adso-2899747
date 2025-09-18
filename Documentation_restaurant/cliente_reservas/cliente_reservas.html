@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cliente & Reservas – Restaurant Management System</title>
+  <link rel="stylesheet" href="../asset/css/estilos.css">
+</head>
+<body>
+<header>
+  <h1>Cliente & Reservas</h1>
+</header>
+<nav>
+  <a href="../index.html" class="nav-link">Inicio</a>
+  <a href="cliente_reservas.html" class="nav-link active">Cliente & Reservas</a>
+  <a href="../pedidos_cocina/pedidos_cocina.html" class="nav-link">Pedidos & Cocina</a>
+  <a href="../administracion/administracion.html" class="nav-link">Administración</a>
+</nav>
+<main>
+  <div class="card">
+    <p>Manages client data, tables and reservations.</p>
+    <h2>Entities</h2>
+    <table>
+      <thead><tr><th>Entity</th><th>Attributes</th></tr></thead>
+      <tbody>
+      <tr><td><strong>cliente</strong></td><td>id, first_name, last_name, phone, email, address, birth_date, status</td></tr>
+      <tr><td><strong>mesa</strong></td><td>id, code, capacity, location, status</td></tr>
+      <tr><td><strong>reserva</strong></td><td>id, code, cliente_id, mesa_id, reservation_date, reservation_time, number_of_people, special_request, status</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

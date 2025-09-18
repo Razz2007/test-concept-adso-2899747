@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor #1f2937
+  ArrowColor #4b5563
+}
+skinparam ActorStyle awesome
+
+title Restaurant Management System – Use Case Diagram
+
+actor "Customer" as Customer
+actor "Employee" as Employee
+actor "Administrator" as Admin
+actor "Supplier" as Supplier
+
+package "Customer & Reservation Management" {
+  (Register Customer) as UC_RegCustomer
+  (Check Available Tables) as UC_CheckTables
+  (Make Reservation) as UC_Reservation
+  (Cancel Reservation) as UC_CancelReservation
+}
+
+package "Order & Kitchen Management" {
+  (Place Order) as UC_Order
+  (Add Dish to Order) as UC_AddDish
+  (Generate Order Detail) as UC_OrderDetail
+  (Update Order Status) as UC_OrderStatus
+}
+
+package "Administrative Management" {
+  (Register Employee) as UC_RegEmployee
+  (Manage Inventory) as UC_Inventory
+  (Register Supplier) as UC_RegSupplier
+  (Supply Ingredients) as UC_Supply
+  (Login) as UC_Login
+}
+
+' Actor relationships
+Customer --> UC_RegCustomer
+Customer --> UC_CheckTables
+Customer --> UC_Reservation
+Customer --> UC_Order
+Customer --> UC_CancelReservation
+
+Employee --> UC_Order
+Employee --> UC_AddDish
+Employee --> UC_OrderStatus
+
+Admin --> UC_Login
+Admin --> UC_RegEmployee
+Admin --> UC_Inventory
+Admin --> UC_RegSupplier
+
+Supplier --> UC_Supply
+
+' Includes
+UC_Reservation ..> UC_CheckTables : <<include>>
+UC_Order ..> UC_AddDish : <<include>>
+UC_Order ..> UC_OrderDetail : <<include>>
+UC_Supply ..> UC_Inventory : <<include>>
+
+' Extends
+UC_OrderStatus ..> UC_OrderDetail : <<extend>>
+UC_CancelReservation ..> UC_Reservation : <<extend>>
+
+legend right
+  == Legend ==
+  <<include>>: Reuses common functionality
+  <<extend>>: Optional/conditional flow
+endlegend
+@enduml
