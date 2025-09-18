@@ -1,0 +1,31 @@
+@startuml
+title Restaurant Management – Sequence Diagram
+
+actor Customer
+participant "Customer Management\n(Reservation)" as Reservation
+participant "Customer Management\n(Table)" as Table
+participant "Order Management\n(Order)" as Order
+participant "Order Management\n(OrderDetail)" as Detail
+participant "Administrative Management\n(Notification)" as Notification
+
+' Reservation flow
+Customer -> Reservation : Request reservation
+Reservation -> Table : Check availability
+Table --> Reservation : Table available
+Reservation --> Customer : Confirm reservation
+
+' Order flow
+Customer -> Order : Place order
+Order -> Detail : Add dishes to order
+Detail --> Order : Dishes added
+Order --> Customer : Order created
+
+' Optional cancellation flow
+Customer -> Reservation : Cancel reservation (optional)
+Reservation --> Customer : Reservation cancelled
+
+' Notification
+Order -> Notification : Send confirmation
+Notification --> Customer : Confirmation sent
+
+@enduml
