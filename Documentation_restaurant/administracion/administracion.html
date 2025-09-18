@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración – Restaurant Management System</title>
+  <link rel="stylesheet" href="../asset/css/estilos.css">
+</head>
+<body>
+<header>
+  <h1>Administración</h1>
+</header>
+<nav>
+  <a href="../index.html" class="nav-link">Inicio</a>
+  <a href="../cliente_reservas/cliente_reservas.html" class="nav-link">Cliente & Reservas</a>
+  <a href="../pedidos_cocina/pedidos_cocina.html" class="nav-link">Pedidos & Cocina</a>
+  <a href="administracion.html" class="nav-link active">Administración</a>
+</nav>
+<main>
+  <div class="card">
+    <p>Manages employees, suppliers and inventory control.</p>
+    <h2>Entities</h2>
+    <table>
+      <thead><tr><th>Entity</th><th>Attributes</th></tr></thead>
+      <tbody>
+      <tr><td><strong>empleado</strong></td><td>id, first_name, last_name, document_number, role, phone, email, hire_date, salary, status</td></tr>
+      <tr><td><strong>proveedor</strong></td><td>id, name, contact_name, phone, email, address, status</td></tr>
+      <tr><td><strong>inventario</strong></td><td>id, ingrediente_id, current_stock, last_updated, status</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

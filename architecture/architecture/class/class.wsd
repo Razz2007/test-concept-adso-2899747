@@ -1,0 +1,74 @@
+@startuml
+title Restaurant Management System – Class Diagram (IDs only)
+
+class customer {
+  + customer_id
+}
+
+class reservation {
+  + reservation_id
+  + customer_id
+  + table_id
+}
+
+class table {
+  + table_id
+}
+
+class order {
+  + order_id
+  + customer_id
+  + table_id
+}
+
+class order_detail {
+  + detail_id
+  + order_id
+  + dish_id
+}
+
+class dish {
+  + dish_id
+}
+
+class ingredient {
+  + ingredient_id
+}
+
+class dish_ingredient {
+  + id
+  + dish_id
+  + ingredient_id
+}
+
+class employee {
+  + employee_id
+}
+
+class supplier {
+  + supplier_id
+}
+
+class inventory {
+  + inventory_id
+  + ingredient_id
+  + supplier_id
+}
+
+' --- RELATIONSHIPS ---
+
+customer "1" o-- "many" reservation
+customer "1" o-- "many" order
+
+table "1" o-- "many" reservation
+table "1" o-- "many" order
+
+order "1" o-- "many" order_detail
+order_detail "many" --> "1" dish
+
+dish "many" o-- "many" ingredient : "dish_ingredient"
+
+supplier "1" o-- "many" inventory
+ingredient "1" o-- "many" inventory
+
+@enduml
