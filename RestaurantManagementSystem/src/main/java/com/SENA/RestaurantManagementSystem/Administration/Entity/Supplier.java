@@ -1,33 +1,72 @@
 package com.SENA.RestaurantManagementSystem.Administration.Entity;
 
+import com.SENA.RestaurantManagementSystem.Entity.ABaseEntity;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Data;
 
 @Entity
-@Table(name = "supplier", schema = "administration")
-@Schema(name = "supplier", description = "Entity representing suppliers")
-@Data
-public class Supplier extends AAdministrationBaseEntity {
+@Table(name = "supplier")
+public class Supplier extends ABaseEntity {
+    @Schema(description = "Nombre del proveedor", example = "Proveedor ABC")
     @Column(name = "name", nullable = false, length = 100)
-    @Schema(description = "Supplier's name", example = "Fresh Foods Inc.")
     private String name;
 
+    @Schema(description = "Nombre del contacto", example = "María García")
     @Column(name = "contact_name", nullable = false, length = 100)
-    @Schema(description = "Supplier's contact person", example = "Maria Garcia")
     private String contactName;
 
+    @Schema(description = "Teléfono del proveedor", example = "+57 300 987 6543")
     @Column(name = "phone", nullable = false, length = 20)
-    @Schema(description = "Supplier's phone number", example = "+57 301 987 6543")
     private String phone;
 
-    @Column(name = "email", nullable = false, length = 100)
-    @Schema(description = "Supplier's email address", example = "contact@freshfoods.com")
+    @Schema(description = "Correo electrónico", example = "contacto@proveedor.com")
+    @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 
+    @Schema(description = "Dirección", example = "Calle 123, Ciudad")
     @Column(name = "address", nullable = false, length = 255)
-    @Schema(description = "Supplier's address", example = "456 Supplier St #78-90")
     private String address;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

@@ -1,48 +1,111 @@
 package com.SENA.RestaurantManagementSystem.Administration.Entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
+import com.SENA.RestaurantManagementSystem.Entity.ABaseEntity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Data;
 
 @Entity
-@Table(name = "employee", schema = "administration")
-@Schema(name = "employee", description = "Entity representing employees")
-@Data
-public class Employee extends AAdministrationBaseEntity {
-    @Column(name = "first_name", nullable = false, length = 100)
-    @Schema(description = "Employee's first name", example = "John")
+@Table(name = "employee")
+public class Employee extends ABaseEntity {
+    @Schema(description = "Primer nombre del empleado", example = "Juan")
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 100)
-    @Schema(description = "Employee's last name", example = "Smith")
+    @Schema(description = "Apellido del empleado", example = "Pérez")
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
 
+    @Schema(description = "Número de documento", example = "123456789")
     @Column(name = "document_number", nullable = false, length = 20, unique = true)
-    @Schema(description = "Employee's document number", example = "1234567890")
     private String documentNumber;
 
+    @Schema(description = "Rol del empleado", example = "Cocinero")
     @Column(name = "role", nullable = false, length = 50)
-    @Schema(description = "Employee's role", example = "Waiter")
     private String role;
 
+    @Schema(description = "Teléfono del empleado", example = "+57 300 123 4567")
     @Column(name = "phone", nullable = false, length = 20)
-    @Schema(description = "Employee's phone number", example = "+57 300 123 4567")
     private String phone;
 
-    @Column(name = "email", nullable = false, length = 100)
-    @Schema(description = "Employee's email address", example = "john.smith@restaurant.com")
+    @Schema(description = "Correo electrónico", example = "juan.perez@restaurant.com")
+    @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 
+    @Schema(description = "Fecha de contratación", example = "2023-01-15")
     @Column(name = "hire_date", nullable = false)
-    @Schema(description = "Employee's hire date", example = "2023-01-15")
-    private LocalDateTime hireDate;
+    private LocalDate hireDate;
 
+    @Schema(description = "Salario", example = "1500000.00")
     @Column(name = "salary", nullable = false, precision = 10, scale = 2)
-    @Schema(description = "Employee's salary", example = "1500.00")
     private BigDecimal salary;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
 }
