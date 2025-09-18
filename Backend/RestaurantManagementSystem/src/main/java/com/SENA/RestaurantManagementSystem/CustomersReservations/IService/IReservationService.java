@@ -1,0 +1,8 @@
+package com.SENA.RestaurantManagementSystem.CustomersReservations.IService;
+
+import com.SENA.RestaurantManagementSystem.CustomersReservations.Entity.Reservation;
+import com.SENA.RestaurantManagementSystem.CustomersReservations.DTO.ReservationReqDto;
+import com.SENA.RestaurantManagementSystem.CustomersReservations.DTO.ReservationResDto;
+
+public interface IReservationService extends IBaseServiceCustomersReservations<Reservation, ReservationReqDto, ReservationResDto> {
+}
